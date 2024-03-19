@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AspireSys</title>
+  <link rel="icon" href="vero-white-icon.svg">
+  <link rel="stylesheet" href="regForm.css"/>
+</head>
+<body>
+  <div class="sideImage">
+    <h2>Aspire Systems</h2>
+    <p>
+      Aspire Systems is a right-sized global leader in technology, digital transformation and software engineering based on the cornerstones of agility, customer experience and operational excellence.Our people-centric culture and innovation mindset act as the key drivers of our growth.
+    </p>
+</div>
+
+  <div class="RegForm">
+     <form method="post" action="C:\Users\kongu\OneDrive\Documents\Tutorials_notes\Start.html">
+	<h2>Registration form</h2>
+      <table>
+      <tr>
+        <td><label for="firstName">First Name:</label></td>
+        <td><input type="text" id="firstName" name="firstName" placeholder="First Name" minlength="4" maxlength="20" required></td>
+      </tr>
+      <tr>
+        <td><label for="lastName">Last Name:</label></td>
+        <td><input type="text" id="lastName" name="lastName" placeholder="Last Name" maxlength="20" required></td>
+      </tr>
+	<tr>
+        <td><label for="lastName">Email:</label></td>
+        <td><input type="text" id="lastName" name="lastName" placeholder="E-mail" maxlength="20" required></td>
+      </tr>
+	
+      <tr>
+        <td><label for="password">Password:</label></td>
+        <td><input type="password" id="password" minlength="8"  name="password" placeholder="Password" maxlength="20" required></td>
+      </tr>
+
+	<tr>
+        <td><label for="Skills">Skills:</label></td>
+        <td><input type="checkbox" name="Java" >Java
+	<input type="checkbox"  name="Python">Python
+	<input type="checkbox"  name="C++">C++
+	</td>
+      </tr>
+      <tr>
+        <td><label>Gender:</label></td>
+        <td>
+          <input type="radio" id="male" name="gender" value="male"><label for="male">Male</label>
+          <input type="radio" id="female" name="gender" value="female"><label for="female">Female</label>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="branch">Branch:</label></td>
+        <td>
+          <select id="branch" name="branch">
+            <option value="None">None</option>
+            <option value="IT">IT</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="CSBS">CSBS</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: center;">
+          <input type="submit" value="Submit">
+        </td>
+      </tr>
+    </table>
+    </form>
+  </div>
+
+</body>
+</html>
+
