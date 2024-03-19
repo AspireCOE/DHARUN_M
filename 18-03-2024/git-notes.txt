@@ -1,0 +1,15 @@
+Imp git commands
+git init -> to initialize the repo in local
+git status -> to view the status of the files in repo
+git add-> adding to the staging area(. for all)
+git commit -m (Message)-> to commit to local repo
+git clone -> to Clone the repo from git hub
+git remote add origin ""-> to add the repo from github
+git log->to see commited messages
+git checkout "HashCode"-> to go to previous commit
+git push origin main-> to add to github
+git pull -> to get the changed file from the github only changed
+git branch "name"->to create new branch
+git switch -> to switch btw branch
+git stash -> to view the documents and logs in staging area
+git merge -> to merge the branch
