@@ -67,3 +67,298 @@ mysql> Select SUM(scost*sold) as Rev from Software where dev_in='JetBrains';
 | 39800000.00 |
 +-------------+
 1 row in set (0.00 sec)
+
+
+8.mysql> select * from software;
++----------+------------+--------+----------+-------+------+
+| pname    | title      | dev_in | scost    | dcost | sold |
++----------+------------+--------+----------+-------+------+
+| Dharun   | parachutes | basic  |   399.95 |  6000 |   43 |
+| Akash    | bmi        | pascal |   378.95 |  6900 |   43 |
+| Rahul    | cal        | c      | 45600.78 |  9000 |   63 |
+| Ramesh   | todo       | c      |   399.95 |  6000 |   49 |
+| Jaswanth | athji      | pascal |   379.95 |  8900 |   43 |
++----------+------------+--------+----------+-------+------+
+5 rows in set (0.00 sec)
+
+9.mysql> select * from software where pname='Dharun';
++--------+------------+--------+--------+-------+------+
+| pname  | title      | dev_in | scost  | dcost | sold |
++--------+------------+--------+--------+-------+------+
+| Dharun | parachutes | basic  | 399.95 |  6000 |   43 |
++--------+------------+--------+--------+-------+------+
+1 row in set (0.00 sec)
+
+10.Select * from studies;
++----------+----------+----------+-------+
+| pname    | splace   | course   | ccost |
++----------+----------+----------+-------+
+| Dharun   | tiruppur | pgdca    |  4500 |
+| Akash    | mad      | dcs      |  5000 |
+| Jaswanth | nam      | cse      |  9000 |
+| priya    | cbe      | embedded |  9900 |
++----------+----------+----------+-------+
+4 rows in set (0.00 sec)
+
+11.Select count(splace) from studies where splace='cbe';
++---------------+
+| count(splace) |
++---------------+
+|             1 |
++---------------+
+1 row in set (0.00 sec)
+
+12.select * from programmer;
++----------+------------+------------+------+---------+---------+--------+
+| pname    | dob        | doj        | sex  | prof1   | prof2   | salary |
++----------+------------+------------+------+---------+---------+--------+
+| Dharun   | 1966-01-21 | 1992-04-21 | m    | pascal  | basic   |   3000 |
+| Akash    | 1967-04-26 | 1993-04-19 | m    | c sharp | angular |   9000 |
+| Rahul    | 1969-09-09 | 1992-05-02 | f    | java    | react   |   7000 |
+| Jaswanth | 1970-04-15 | 1992-03-12 | f    | pascal  | js      |   3000 |
+| Pavitha  | 1966-07-21 | 1992-06-21 | m    | c       | css     |   5000 |
+| Akhil    | 1971-08-09 | 1992-04-21 | m    | python  | basic   |  10000 |
+| Adhithya | 1969-08-09 | 1992-04-21 | m    | python  | basic   |  10000 |
++----------+------------+------------+------+---------+---------+--------+
+7 rows in set (0.00 sec)
+
+12.mysql> Select * from programmer where salary>20000;
+Empty set (0.00 sec)
+
+
+13.mysql> select pname,CEIL(dcost/scost) as Products_sold from software;
++----------+---------------+
+| pname    | Products_sold |
++----------+---------------+
+| Dharun   |            16 |
+| Akash    |            19 |
+| Rahul    |             1 |
+| Ramesh   |            16 |
+| Jaswanth |            24 |
++----------+---------------+
+5 rows in set (0.00 sec)
+
+14.mysql> select max(scost) as high_soft from software where dev_in='BASIC';
++-----------+
+| high_soft |
++-----------+
+|    399.95 |
++-----------+
+1 row in set (0.00 sec)
+
+15.mysql> select * from software where CEIL(dcost/scost)>sold;
+Empty set (0.00 sec)
+
+16.mysql> select * from software where dcost<sold*scost;
++----------+------------+--------+----------+-------+------+
+| pname    | title      | dev_in | scost    | dcost | sold |
++----------+------------+--------+----------+-------+------+
+| Dharun   | parachutes | basic  |   399.95 |  6000 |   43 |
+| Akash    | bmi        | pascal |   378.95 |  6900 |   43 |
+| Rahul    | cal        | c      | 45600.78 |  9000 |   63 |
+| Ramesh   | todo       | c      |   399.95 |  6000 |   49 |
+| Jaswanth | athji      | pascal |   379.95 |  8900 |   43 |
++----------+------------+--------+----------+-------+------+
+5 rows in set (0.00 sec)
+
+17.mysql> select count(*) as pack from software where dev_in='dbase';
++------+
+| pack |
++------+
+|    0 |
++------+
+1 row in set (0.00 sec)
+
+18.mysql> select count(*) from programmer p join studies s on p.pname=s.pname where splace='cbe';
++----------+
+| count(*) |
++----------+
+|        0 |
++----------+
+1 row in set (0.01 sec)
+
+19.mysql> select count(*) from programmer p join studies s on p.pname=s.pname where splace='nam';
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+
+20.mysql> select count(*) from programmer p join studies s on p.pname=s.pname where ccost between 5000 and 10000;
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+21.mysql> select count(*) as programmers  from studies where ccost between 5000 and 10000;
++-------------+
+| programmers |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.00 sec)
+
+22.mysql> select avg(ccost) as AvgCourseFee from studies;
++--------------+
+| AvgCourseFee |
++--------------+
+|    7100.0000 |
++--------------+
+1 row in set (0.00 sec)
+
+23.mysql> select * from programmer where prof1='c' or prof2='c';
++---------+------------+------------+------+-------+-------+--------+
+| pname   | dob        | doj        | sex  | prof1 | prof2 | salary |
++---------+------------+------------+------+-------+-------+--------+
+| Pavitha | 1966-07-21 | 1992-06-21 | m    | c     | css   |   5000 |
++---------+------------+------------+------+-------+-------+--------+
+1 row in set (0.01 sec)
+
+24.mysql> select * from programmer where prof1 in ('Cobol','Pascal') or prof2 in ('Cobol','Pascal');
++----------+------------+------------+------+--------+-------+--------+
+| pname    | dob        | doj        | sex  | prof1  | prof2 | salary |
++----------+------------+------------+------+--------+-------+--------+
+| Dharun   | 1966-01-21 | 1992-04-21 | m    | pascal | basic |   3000 |
+| Jaswanth | 1970-04-15 | 1992-03-12 | f    | pascal | js    |   3000 |
++----------+------------+------------+------+--------+-------+--------+
+2 rows in set (0.00 sec)
+
+
+25.mysql> select * from programmer where prof1  not in ('C','Pascal') and prof2 not in ('C','Pascal');
++----------+------------+------------+------+---------+---------+--------+
+| pname    | dob        | doj        | sex  | prof1   | prof2   | salary |
++----------+------------+------------+------+---------+---------+--------+
+| Akash    | 1967-04-26 | 1993-04-19 | m    | c sharp | angular |   9000 |
+| Rahul    | 1969-09-09 | 1992-05-02 | f    | java    | react   |   7000 |
+| Akhil    | 1971-08-09 | 1992-04-21 | m    | python  | basic   |  10000 |
+| Adhithya | 1969-08-09 | 1992-04-21 | m    | python  | basic   |  10000 |
++----------+------------+------------+------+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+26.mysql> select YEAR(curdate())-YEAR(MIN(dob)) as senior from programmer;
++--------+
+| senior |
++--------+
+|     58 |
++--------+
+1 row in set (0.00 sec)
+
+27.mysql> select YEAR(curdate())-YEAR(MIN(dob)) as senior from programmer where sex='f';
++--------+
+| senior |
++--------+
+|     55 |
++--------+
+1 row in set (0.00 sec)
+
+28.mysql> select avg(YEAR(curdate())-YEAR(dob)) as senior from programmer where sex='f';
++---------+
+| senior  |
++---------+
+| 54.5000 |
++---------+
+1 row in set (0.00 sec)
+
+29.mysql> select pname,YEAR(doj)-YEAR(dob) as senior from programmer order by pname desc;
++----------+--------+
+| pname    | senior |
++----------+--------+
+| Rahul    |     23 |
+| Pavitha  |     26 |
+| Jaswanth |     22 |
+| Dharun   |     26 |
+| Akhil    |     21 |
+| Akash    |     26 |
+| Adhithya |     23 |
++----------+--------+
+7 rows in set (0.00 sec)
+
+30.mysql> select pname as senior from programmer where Month(curdate())=Month(dob);
++----------+
+| senior   |
++----------+
+| Akash    |
+| Jaswanth |
++----------+
+2 rows in set (0.00 sec)
+
+31.mysql> select count(*) from programmer where sex='f';
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+32.mysql> select distinct prof1,prof2 from programmer where sex='m';
++---------+---------+
+| prof1   | prof2   |
++---------+---------+
+| pascal  | basic   |
+| c sharp | angular |
+| c       | css     |
+| python  | basic   |
++---------+---------+
+4 rows in set (0.10 sec)
+
+33.mysql> select distinct prof1 from programmer where sex='m' union select distinct prof2 from programmer where sex='m';
++---------+
+| prof1   |
++---------+
+| pascal  |
+| c sharp |
+| c       |
+| python  |
+| basic   |
+| angular |
+| css     |
++---------+
+7 rows in set (0.01 sec)
+
+34.mysql> select prof1 from programmer where sex='m' union select prof2 from programmer where sex='m';
++---------+
+| prof1   |
++---------+
+| pascal  |
+| c sharp |
+| c       |
+| python  |
+| basic   |
+| angular |
+| css     |
++---------+
+7 rows in set (0.00 sec)
+
+35.mysql> select avg(salary) from programmer;
++-------------+
+| avg(salary) |
++-------------+
+|   6714.2857 |
++-------------+
+1 row in set (0.00 sec)
+
+
+36.mysql> select count(*) as totalProgrammer from programmer where salary between 2000 and 4000;
++-----------------+
+| totalProgrammer |
++-----------------+
+|               2 |
++-----------------+
+1 row in set (0.00 sec)
+
+37.mysql> select * from programmer where prof1  not in ('Cobol','Pascal') and prof2 not in ('Cobol','Pascal');
++----------+------------+------------+------+---------+---------+--------+
+| pname    | dob        | doj        | sex  | prof1   | prof2   | salary |
++----------+------------+------------+------+---------+---------+--------+
+| Akash    | 1967-04-26 | 1993-04-19 | m    | c sharp | angular |   9000 |
+| Rahul    | 1969-09-09 | 1992-05-02 | f    | java    | react   |   7000 |
+| Pavitha  | 1966-07-21 | 1992-06-21 | m    | c       | css     |   5000 |
+| Akhil    | 1971-08-09 | 1992-04-21 | m    | python  | basic   |  10000 |
+| Adhithya | 1969-08-09 | 1992-04-21 | m    | python  | basic   |  10000 |
++----------+------------+------------+------+---------+---------+--------+
+5 rows in set (0.00 sec)
+
