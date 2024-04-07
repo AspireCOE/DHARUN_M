@@ -362,3 +362,99 @@ Empty set (0.00 sec)
 +----------+------------+------------+------+---------+---------+--------+
 5 rows in set (0.00 sec)
 
+38.SELECT course FROM Studies ORDER BY ccost DESC LIMIT 1;
+
+SELECT course FROM Studies GROUP BY course ORDER BY COUNT(*) DESC LIMIT 1;
+
+SELECT splace AS institute_name, course FROM Studies GROUP BY institute_name, course HAVING AVG(ccost) < (SELECT AVG(ccost) FROM Studies);
+
+SELECT splace AS institute_name FROM Studies GROUP BY institute_name HAVING MAX(ccost) = (SELECT MAX(ccost) FROM Studies);
+
+SELECT course FROM Studies GROUP BY course HAVING COUNT(*) < (SELECT AVG(COUNT(*)) FROM Studies GROUP BY course);
+
+SELECT splace AS institute_name FROM Studies WHERE course IN (SELECT course FROM StudiesGROUP BY course HAVING COUNT(*) < (SELECT AVG(COUNT(*)) FROM Studies GROUP BY course));
+
+SELECT course FROM Studies GROUP BY course HAVING ABS(AVG(ccost) - (SELECT AVG(ccost) FROM Studies)) <= 1000;
+
+SELECT name FROM Software ORDER BY dcost DESC LIMIT 1;
+
+SELECT name FROM Software ORDER BY scost ASC LIMIT 1;
+
+SELECT name FROM Software ORDER BY sold ASC LIMIT 1;
+
+SELECT dev_in AS language FROM Software ORDER BY (scost * sold) DESC LIMIT 1;
+
+SELECT sold FROM Software ORDER BY (scost - dcost) ASC LIMIT 1;
+
+SELECT name FROM Software WHERE dev_in = 'PASCAL' ORDER BY scost DESCLIMIT 1;
+
+
+SELECT name FROM Software GROUP BY name ORDER BY COUNT(*) DESC LIMIT 1;
+
+SELECT name FROM Software ORDER BY scost DESC LIMIT 1;
+
+SELECT name FROM Software GROUP BY name HAVING SUM(sold) < (SELECT AVG(sold) FROM Software);
+
+SELECT prof1 AS language FROM Programmer GROUP BY language ORDER BY COUNT(*) DESC LIMIT 1;
+
+SELECT name FROM Software GROUP BY name HAVING SUM(scost) > (2 * SUM(dcost));
+
+SELECT p.name AS programmer_name, s.language, MIN(s.scost) AS cheapest_package_cost FROM Programmer p JOIN Software s ON p.name = s.name GROUP BY p.name, s.language;
+
+SELECT name FROM Programmer WHERE sex = 'male' AND dob = (SELECT MIN(dob) FROM Programmer WHERE sex = 'male' AND YEAR(dob) = 1965);
+
+SELECT name, MAX(dev_in) AS highest_selling_language, MIN(dev_in) AS lowest_selling_language FROM Software GROUP BY name;
+
+SELECT name FROM Programmer WHERE sex = 'female' AND YEAR(doj) = 1992 ORDER BY dob ASC LIMIT 1;
+
+SELECT YEAR(dob) AS birth_year FROM Programmer GROUP BY birth_year ORDER BY COUNT(*) DESC LIMIT 1;
+
+
+mysql> SELECT *
+    -> FROM Software
+    -> WHERE dev_in IN (
+    ->     SELECT name
+    ->     FROM Programmer
+    ->     WHERE sex = 'male' AND salary > 3000
+    -> );
+Empty set (0.01 sec)
+
+mysql> SELECT *
+    -> FROM Software
+    -> WHERE dev_in = 'PASCAL' AND name IN (
+    ->     SELECT name
+    ->     FROM Programmer
+    ->     WHERE sex = 'female'
+    -> );
+Empty set (0.01 sec)
+
+mysql> SELECT *
+    -> FROM Programmer
+    -> WHERE doj < '1990-01-01';
+Empty set (0.00 sec)
+
+mysql>
+mysql> SELECT *
+    -> FROM Software
+    -> WHERE dev_in = 'C' AND name IN (
+    ->     SELECT name
+    ->     FROM Programmer
+    ->     WHERE sex = 'female' AND splace = 'PRAGATHI'
+    -> );
+ERROR 1054 (42S22): Unknown column 'splace' in 'where clause'
+mysql> SELECT splace, name, COUNT(*) AS num_packages, SUM(sold) AS num_copies_sold, SUM(sold * scost) AS sales_value
+    -> FROM Software
+    -> JOIN Programmer ON Software.name = Programmer.name
+    -> GROUP BY splace, name;
+ERROR 1054 (42S22): Unknown column 'splace' in 'field list'
+mysql> SELECT s.*
+    -> FROM Software s
+    -> JOIN Programmer p ON s.name = p.name
+    -> WHERE s.dev_in = 'C' AND p.sex = 'female' AND p.splace = 'PRAGATHI';
+ERROR 1054 (42S22): Unknown column 'p.splace' in 'where clause'
+mysql>
+mysql> SELECT s.*
+    -> FROM Software s
+    -> JOIN Programmer p ON s.name = p.name
+    -> WHERE s.dev_in = 'C' AND p.sex = 'female' AND p.splace = 'PRAGATHI';
+ERROR 1054 (42S22): Unknown column 'p.splace' in 'where clause'
