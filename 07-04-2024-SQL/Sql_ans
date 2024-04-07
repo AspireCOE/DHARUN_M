@@ -1,0 +1,69 @@
+1.mysql> Select name,YEAR(CURDATE())-YEAR(dob) from Programmer;
++---------+---------------------------+
+| name    | YEAR(CURDATE())-YEAR(dob) |
++---------+---------------------------+
+| Dharun  |                        31 |
+| Bala    |                        28 |
+| William |                        35 |
+| Alice   |                        27 |
+| Ethan   |                        34 |
+| Akash   |                        29 |
+| Alex    |                        40 |
+| Rahul   |                        38 |
+| Noah    |                        32 |
+| Grace   |                        26 |
++---------+---------------------------+
+10 rows in set (0.00 sec)
+
+2.mysql> Select P.name,YEAR(CURDATE())-YEAR(P.dob) from Programmer P Join Studies S ON P.name=S.name Where S.course='Marketing';
++-------+-----------------------------+
+| name  | YEAR(CURDATE())-YEAR(P.dob) |
++-------+-----------------------------+
+| Grace |                          26 |
++-------+-----------------------------+
+1 row in set (0.00 sec)
+
+3.mysql> Select Max(sold) from Software;
++-----------+
+| Max(sold) |
++-----------+
+|  10000000 |
++-----------+
+1 row in set (0.01 sec)
+
+
+4.mysql> Select name,YEAR(CURDATE())-YEAR(dob) from Programmer Where MONTH(dob)=1;
++------+---------------------------+
+| name | YEAR(CURDATE())-YEAR(dob) |
++------+---------------------------+
+| Noah |                        32 |
++------+---------------------------+
+1 row in set (0.00 sec)
+
+
+5.mysql> Select Count(P.name) from Programmer P Join Studies S ON P.name=S.name Group by S.course Having S.course='Marketing';
++---------------+
+| Count(P.name) |
++---------------+
+|             1 |
++---------------+
+1 row in set (0.23 sec)
+
+
+6.mysql> Select Count(P.name) AS NOOfPersondonemarketing from Programmer P Join Studies S ON P.name=S.name Group by S.course Having S.course='Marketing';
++-------------------------+
+| NOOfPersondonemarketing |
++-------------------------+
+|                       1 |
++-------------------------+
+1 row in set (0.14 sec)
+
+
+7.
+mysql> Select SUM(scost*sold) as Rev from Software where dev_in='JetBrains';
++-------------+
+| Rev         |
++-------------+
+| 39800000.00 |
++-------------+
+1 row in set (0.00 sec)
